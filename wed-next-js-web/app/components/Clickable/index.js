@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import T from '@components/Text';
 
+// Clickable
+
 const StyledClickable = styled.div`
   color: #1890ff;
   &:hover {

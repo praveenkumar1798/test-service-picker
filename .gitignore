@@ -1,0 +1,5 @@
+# Don't check auto-generated stuff into git
+build
+node_modules
+.sst
+cdk.context.json

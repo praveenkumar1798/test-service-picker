@@ -1,0 +1,27 @@
+{
+	"name": "app",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "sst dev",
+		"build": "sst build",
+		"deploy:dev": "sst deploy --stage dev",
+		"deploy:qa": "sst deploy --stage qa",
+		"deploy:prod": "sst deploy --stage prod",
+		"remove:dev": "sst remove --stage dev",
+		"remove:qa": "sst remove --stage qa",
+		"remove:prod": "sst remove --stage prod",
+		"console": "sst console",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"sst": "^2.0.18",
+		"aws-cdk-lib": "2.62.2",
+		"constructs": "10.1.156",
+		"dotenv": "^10.0.0"
+	},
+	"workspaces": [
+		"/*"
+	]
+}

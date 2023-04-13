@@ -1,0 +1,42 @@
+name: CI wed-next-js-web
+on:
+  push:
+    branches: ["master", "develop", "qa"]
+    paths: "wed-next-js-web/**"
+  pull_request:
+    paths: "wed-next-js-web/**"
+
+  # Allows to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    defaults: 
+      run:
+        working-directory: ./wed-next-js-web
+    strategy:
+      matrix:
+        node-version: [16.14.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+          cache-dependency-path: ./wed-next-js-web/package.json
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build:dev
+
+      - name: Test
+        run: yarn test

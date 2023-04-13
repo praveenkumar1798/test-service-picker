@@ -1,0 +1,29 @@
+version: '3'
+services:
+  wed_node_hapi_pg_db:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    restart: always
+    env_file:
+      - .env.docker
+
+  redis:
+    image: 'redis:6-alpine'
+    ports:
+      - 6379:6379
+    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+
+  app:
+    build:
+      context: .
+      args:
+        ENVIRONMENT_NAME: docker
+    depends_on:
+      - redis
+      - wed_node_hapi_pg_db
+    restart: always
+    ports:
+      - 9000:9000
+    env_file:
+      - .env.docker

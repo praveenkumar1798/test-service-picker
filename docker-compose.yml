@@ -1,0 +1,47 @@
+version: '3'
+services:
+  # Setup PostgreSQL
+  wed_node_hapi_pg_db:
+    image: 'postgres:15' 
+    ports:
+      - 5432:5432 
+    restart: always # This will make sure that the container comes up post unexpected shutdowns
+    env_file:
+      - ./wed-node-hapi-pg/.env.docker
+    volumes:
+      - wed-node-hapi-pg-db-volume:/var/lib/postgresql/data
+
+  # Setup wed-node-hapi-pg api
+  wed-node-hapi-pg:
+    build:
+      context: './wed-node-hapi-pg'
+      args:
+        ENVIRONMENT_NAME: docker
+    ports:
+      - 9000:9000
+    env_file:
+      - ./wed-node-hapi-pg/.env.docker
+    environment:
+      ENVIRONMENT_NAME: docker
+
+
+  # Setup Redis
+  redis:
+    image: 'redis:6-alpine'
+    ports:
+      - 6379:6379
+    # Default command that redis will execute at start
+    command: ['redis-server']
+
+  # Setup wed-next-js-web web
+  wed-next-js-web:
+    build:
+      context: './wed-next-js-web'
+    ports:
+      - 3000:3000
+    env_file:
+      - ./wed-next-js-web/.env.docker
+
+# Setup Volumes
+volumes:
+  wed-node-hapi-pg-db-volume:

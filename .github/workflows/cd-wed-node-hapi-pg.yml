@@ -32,7 +32,7 @@ jobs:
           elif [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
               echo "ENVIRONMENT_NAME=qa" >> $GITHUB_ENV
           else 
-              echo "ENVIRONMENT_NAME=development" >> $GITHUB_ENV
+              echo "ENVIRONMENT_NAME=development" >> "$GITHUB_ENV"
           fi
 
       # Configure AWS with credentials
@@ -55,6 +55,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
+        working-directory: ./wed-node-hapi-pg
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

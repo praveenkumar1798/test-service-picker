@@ -2,11 +2,11 @@
 
 on:
     push:
-        branches:
-            - develop
-            - qa
-            - master
-        paths: "wed-node-hapi-pg/**"
+      branches:
+        - develop
+        - qa
+        - master
+      paths: "wed-node-hapi-pg/**"
 
 jobs:
   docker-build-and-push:

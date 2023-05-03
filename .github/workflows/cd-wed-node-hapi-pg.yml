@@ -27,12 +27,12 @@ jobs:
 
       - name: Set env.ENVIRONMENT_NAME
         run: |
-          if [[ ${{ steps.vars.outputs.short_ref }} == 'master' ]]; then
-              echo "ENVIRONMENT_NAME=production" >> "$GITHUB_ENV"
-          else if [[ ${{ steps.vars.outputs.short_ref }} == 'qa' ]]; then
-              echo "ENVIRONMENT_NAME=qa" >> "$GITHUB_ENV"
+          if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
+              echo "ENVIRONMENT_NAME=production" >> $GITHUB_ENV
+          else if [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
+              echo "ENVIRONMENT_NAME=qa" >> $GITHUB_ENV
           else 
-              echo "ENVIRONMENT_NAME=development" >> "$GITHUB_ENV"
+              echo "ENVIRONMENT_NAME=development" >> $GITHUB_ENV
           fi
 
       # Configure AWS with credentials

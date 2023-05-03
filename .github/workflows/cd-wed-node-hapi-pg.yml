@@ -1,4 +1,4 @@
-# CD pipeline for Node (Hapi- REST API) for development branch
+# CD pipeline for wed-node-hapi-pg
 
 on:
   push:

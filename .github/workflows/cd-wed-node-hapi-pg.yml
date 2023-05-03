@@ -25,7 +25,7 @@ jobs:
 
       - name: Get branch name
         id: vars
-        run: echo "short_ref=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 
       - name: Set env.ENVIRONMENT_NAME
         run: |
@@ -63,10 +63,10 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
-        id: wed-task
+        id: task
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
+          task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.branch }}.json
           container-name: wed-container
           image: ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
 
@@ -74,9 +74,9 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.wed-task.outputs.task-definition }}
-          service: wed-service-${{ steps.vars.outputs.short_ref }}
-          cluster: wed-cluster-${{ steps.vars.outputs.short_ref }}
+          task-definition: ${{ steps.task.outputs.task-definition }}
+          service: wed-service-${{ steps.vars.outputs.branch }}
+          cluster: wed-cluster-${{ steps.vars.outputs.branch }}
 
       # Logout of Amazon
       - name: Logout of Amazon ECR

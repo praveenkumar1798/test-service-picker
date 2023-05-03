@@ -6,7 +6,7 @@ on:
       - develop
       - qa
       - master
-    paths: "wed-node-hapi-pg/**"
+    # paths: "wed-node-hapi-pg/**"
 
   workflow_dispatch:
 
@@ -25,16 +25,16 @@ jobs:
 
       - name: Get branch name
         id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF_NAME}
+        run: echo "short_ref=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
 
       - name: Set env.ENVIRONMENT_NAME
         run: |
-          if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
-              echo "ENVIRONMENT_NAME=production" >> $GITHUB_ENV
-          elif [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
-              echo "ENVIRONMENT_NAME=qa" >> $GITHUB_ENV
+          if [[ ${{ steps.vars.outputs.stage }} == master ]]; then
+              echo "ENVIRONMENT_NAME=production" >> $GITHUB_OUTPUT
+          elif [[ ${{ steps.vars.outputs.stage }} == qa ]]; then
+              echo "ENVIRONMENT_NAME=qa" >> $GITHUB_OUTPUT
           else 
-              echo "ENVIRONMENT_NAME=development" >> $GITHUB_ENV
+              echo "ENVIRONMENT_NAME=development" >> $GITHUB_OUTPUT
           fi
 
       # Configure AWS with credentials

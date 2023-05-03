@@ -1,0 +1,71 @@
+# CD pipeline for Node (Hapi- REST API) for development branch
+
+on:
+    push:
+        branches:
+            - develop
+            - qa
+            - master
+        paths: "wed-node-hapi-pg/**"
+
+jobs:
+  docker-build-and-push:
+    name: Docker build image and push
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./wed-node-hapi-pg
+
+    steps:
+      # Checkout
+      - name: Checkout to branch
+        uses: actions/checkout@v3
+
+      - name: Get branch name
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF_NAME}
+
+      # Configure AWS with credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Build, tag, and push image to Amazon ECR
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      # Create and configure Amazon ECS task definition
+      - name: Render Amazon ECS task definition
+        id: wed-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
+          container-name: wed-${{ steps.vars.outputs.short_ref }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+
+      # Deploy to Amazon ECS
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.wed-container.outputs.task-definition }}
+          service: wed-service-${{ steps.vars.outputs.short_ref }}
+          cluster: wed-cluster-${{ steps.vars.outputs.short_ref }}
+
+      # Logout of Amazon
+      - name: Logout of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}

@@ -186,7 +186,7 @@ const initServer = async () => {
   server.ext('onPreResponse', onPreResponse);
 
   // eslint-disable-next-line no-console
-  logger().info('Server running on: ', server.info.uri);
+  logger().info('server running on: ', server.info.uri);
 
 
   server.events.on('request', (_, error) => {

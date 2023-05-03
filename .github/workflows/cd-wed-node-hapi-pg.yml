@@ -1,21 +1,12 @@
 # CD pipeline for Node (Hapi- REST API) for development branch
 
 on:
-<<<<<<< Updated upstream
-    push:
-        branches:
-            - develop
-            - qa
-            - master
-        paths: "wed-node-hapi-pg/**"
-=======
   push:
     branches:
       - develop
       - qa
       - master
     paths: "wed-node-hapi-pg/**"
->>>>>>> Stashed changes
 
 jobs:
   docker-build-and-push:

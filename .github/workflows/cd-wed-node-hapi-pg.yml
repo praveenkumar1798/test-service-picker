@@ -32,7 +32,7 @@ jobs:
           elif [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
               echo "ENVIRONMENT_NAME=qa" >> $GITHUB_ENV
           else 
-              echo "ENVIRONMENT_NAME=development" >> "$GITHUB_ENV"
+              echo "ENVIRONMENT_NAME=development" >> $GITHUB_ENV
           fi
 
       # Configure AWS with credentials

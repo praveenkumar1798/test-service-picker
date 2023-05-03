@@ -62,7 +62,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "image": "",
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:latest",
       "name": "wed-container"
     }
   ],
@@ -119,8 +119,6 @@
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "cpu": "1024",
-  "revision": 31,
-  "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
   "volumes": []

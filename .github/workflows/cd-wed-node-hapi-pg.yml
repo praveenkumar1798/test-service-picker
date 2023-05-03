@@ -70,7 +70,7 @@ jobs:
         with:
           task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
           container-name: wed-container
-          image: ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
+          image: 511522223657.dkr.ecr.ap-south-1.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
       # Deploy to Amazon ECS
       - name: Deploy to Amazon ECS

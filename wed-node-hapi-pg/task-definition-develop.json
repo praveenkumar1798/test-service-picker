@@ -1,6 +1,6 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-BetestNodeHap-betestdeveloptaskExecuti-KQMEPDZDCNJE",
+  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-WedNodeHapiPg-wedtaskdevelopExecutionR-1BHWZS5WZL4D9",
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
@@ -8,8 +8,8 @@
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "dev-web-app-BetestNodeHapiPg-betestdeveloptaskbetestdevelopcontainerLogGroupED56E044-08qIuh6Cof7N",
-          "awslogs-stream-prefix": "betest-develop-log-group",
+          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerLogGroupFDE056C3-2Q52e4G1l4Om",
+          "awslogs-stream-prefix": "wed-log-group-develop",
           "awslogs-region": "ap-south-1"
         }
       },
@@ -30,12 +30,12 @@
           "value": ".development"
         }
       ],
-       "secrets": [
+      "secrets": [
         {
-        "name": "DB_PASSWORD",
-        "valueFrom": "ARN_URL:password::"
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-ZAML6B:password::"
         }
-    ],
+      ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
@@ -62,16 +62,15 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:9a9f0346fbfd0fabbedb9ee50ca3c911878a880c340a5b285237456a3b63ee78",
-      "name": "betest-develop-container"
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:e8c25f20daeaf600f72d629d4ae51713c6419b3590fe418f3d8977e82f2f2aa3",
+      "name": "wed-container"
     }
   ],
   "placementConstraints": [],
   "memory": "2048",
-  "taskRoleArn": "arn:aws:iam::511522223657:role/betest-develop-task-role",
+  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-task-role-develop",
   "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/betest-develop-task:1",
-  "family": "betest-develop-task",
+  "family": "wed-task-definition-develop",
   "requiresAttributes": [
     {
       "targetId": null,

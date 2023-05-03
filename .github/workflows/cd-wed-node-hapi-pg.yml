@@ -1,12 +1,12 @@
 # CD pipeline for Node (Hapi- REST API) for development branch
 
 on:
-    push:
-      branches:
-        - develop
-        - qa
-        - master
-      paths: "wed-node-hapi-pg/**"
+  push:
+    branches:
+      - develop
+      - qa
+      - master
+    paths: "wed-node-hapi-pg/**"
 
 jobs:
   docker-build-and-push:
@@ -46,16 +46,15 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker compose build
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
         id: wed-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
-          container-name: wed-${{ steps.vars.outputs.short_ref }}
-          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+          container-name: wed-container
+          image: ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
 
       # Deploy to Amazon ECS
       - name: Deploy to Amazon ECS

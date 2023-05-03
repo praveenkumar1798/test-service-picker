@@ -1,22 +1,21 @@
 name: CI wed-node-hapi-pg
 on:
-    push:
-      branches:
-        - develop
-        - qa
-        - master
-      paths: "wed-node-hapi-pg/**"
-    pull_request:
-      paths: "wed-node-hapi-pg/**"
+  push:
+    branches:
+      - develop
+      - qa
+      - master
+    paths: "wed-node-hapi-pg/**"
+  pull_request:
+    paths: "wed-node-hapi-pg/**"
 
-  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-    defaults: 
+    defaults:
       run:
         working-directory: ./wed-node-hapi-pg
     strategy:

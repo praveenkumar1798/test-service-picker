@@ -23,6 +23,7 @@ import cachedUser from '@utils/cacheMethods';
 import loadRoutes from '@plugins/loadRoutes';
 import Pack from './package.json';
 
+// total cpus
 const totalCPUs = os.cpus().length;
 
 const prepDatabase = async () => {

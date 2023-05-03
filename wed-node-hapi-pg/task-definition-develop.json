@@ -62,7 +62,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:e8c25f20daeaf600f72d629d4ae51713c6419b3590fe418f3d8977e82f2f2aa3",
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1",
       "name": "wed-container"
     }
   ],

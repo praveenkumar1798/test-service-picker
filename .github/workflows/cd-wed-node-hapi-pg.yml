@@ -63,10 +63,10 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
-        id: wed-container
+        id: wed-task
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: task-definition-${{ steps.vars.outputs.short_ref }}.json
+          task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
           container-name: wed-container
           image: ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
 
@@ -74,7 +74,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.wed-container.outputs.task-definition }}
+          task-definition: ${{ steps.wed-task.outputs.task-definition }}
           service: wed-service-${{ steps.vars.outputs.short_ref }}
           cluster: wed-cluster-${{ steps.vars.outputs.short_ref }}
 

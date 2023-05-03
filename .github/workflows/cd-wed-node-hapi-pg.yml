@@ -8,6 +8,8 @@ on:
       - master
     paths: "wed-node-hapi-pg/**"
 
+  workflow_dispatch:
+
 jobs:
   docker-build-and-push:
     name: Docker build image and push
@@ -19,7 +21,7 @@ jobs:
     steps:
       # Checkout
       - name: Checkout to branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Get branch name
         id: vars
@@ -55,7 +57,6 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
-        working-directory: ./wed-node-hapi-pg
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

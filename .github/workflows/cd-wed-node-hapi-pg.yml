@@ -66,7 +66,7 @@ jobs:
         id: wed-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
+          task-definition: task-definition-${{ steps.vars.outputs.short_ref }}.json
           container-name: wed-container
           image: ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG
 

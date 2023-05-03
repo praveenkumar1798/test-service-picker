@@ -46,7 +46,8 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker compose build
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ENVIRONMENT_NAME=development
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
         id: wed-container

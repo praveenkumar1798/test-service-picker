@@ -263,20 +263,23 @@ export function WedNodeHapiPg({ stack }) {
     },
   });
 
-  const container = taskDefinition.addContainer(`${clientPrefix}-container`, {
-    image,
-    memoryLimitMiB: 512,
-    environment: {
-      BUILD_NAME: "develop",
-      ENVIRONMENT_NAME: "development",
-      DB_URI: dbURI,
-      DB_HOST: database.dbInstanceEndpointAddress,
-      REDIS_HOST: redisCache.attrRedisEndpointAddress,
-    },
-    logging: ecs.LogDriver.awsLogs({
-      streamPrefix: `${clientPrefix}-log-group-${environment}`,
-    }),
-  });
+  const container = taskDefinition.addContainer(
+    `${clientPrefix}-container-${environment}`,
+    {
+      image,
+      memoryLimitMiB: 512,
+      environment: {
+        BUILD_NAME: "develop",
+        ENVIRONMENT_NAME: "development",
+        DB_URI: dbURI,
+        DB_HOST: database.dbInstanceEndpointAddress,
+        REDIS_HOST: redisCache.attrRedisEndpointAddress,
+      },
+      logging: ecs.LogDriver.awsLogs({
+        streamPrefix: `${clientPrefix}-log-group-${environment}`,
+      }),
+    }
+  );
 
   container.addPortMappings({ containerPort: 9000 });
 

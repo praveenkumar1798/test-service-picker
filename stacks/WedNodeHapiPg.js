@@ -257,6 +257,8 @@ export function WedNodeHapiPg({ stack }) {
     }
   );
 
+  databaseCredentialsSecret.grantRead(taskRole);
+
   const username = databaseCredentialsSecret
     .secretValueFromJson("username")
     .toString();

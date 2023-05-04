@@ -17,11 +17,19 @@ jobs:
     defaults:
       run:
         working-directory: ./wed-node-hapi-pg
+    strategy:
+      matrix:
+        node-version: [16.14.x]
 
     steps:
       # Checkout
       - name: Checkout to branch
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Get branch name
         id: vars
@@ -61,7 +69,7 @@ jobs:
           DOCKER_BUILDKIT: 1
 
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ENVIRONMENT_NAME=${{ steps.environment.outputs.environment_name }}
+          docker build --no-cache -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ENVIRONMENT_NAME=${{ steps.environment.outputs.environment_name }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       # Create and configure Amazon ECS task definition

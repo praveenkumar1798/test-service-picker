@@ -93,10 +93,11 @@ export function WedNodeHapiPg({ stack }) {
       secretName: `${clientPrefix}-database-credentials-${environment}`,
       description: `Database credentials for ${clientName}-develop`,
       generateSecretString: {
-        excludeCharacters: "\"@/\\ '",
+        excludeCharacters: "'\\;@$\"`!/",
         generateStringKey: "password",
         passwordLength: 30,
         secretStringTemplate: JSON.stringify({ username: dbUsername }),
+        excludePunctuation: true,
       },
     }
   );
@@ -223,13 +224,24 @@ export function WedNodeHapiPg({ stack }) {
 
   const taskRole = new iam.Role(
     stack,
-    `${clientPrefix}-task-role-${environment}`,
+    `${clientPrefix}-ecs-task-role-${environment}`,
     {
       assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
-      roleName: `${clientPrefix}-task-role-${environment}`,
-      description: "Role that the api task definitions use to run the api code",
+      roleName: `${clientPrefix}-ecs-task-role-${environment}`,
     }
   );
+
+  const executionRole = new iam.Role(
+    stack,
+    `${clientPrefix}-ecs-execution-role-${environment}`,
+    {
+      assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
+      roleName: `${clientPrefix}-ecs-execution-role-${environment}`,
+    }
+  );
+
+  databaseCredentialsSecret.grantRead(taskRole);
+  databaseCredentialsSecret.grantRead(executionRole);
 
   const taskDefinition = new ecs.TaskDefinition(
     stack,
@@ -241,10 +253,9 @@ export function WedNodeHapiPg({ stack }) {
       memoryMiB: "512",
       networkMode: ecs.NetworkMode.AWS_VPC,
       taskRole: taskRole,
+      executionRole: executionRole,
     }
   );
-
-  databaseCredentialsSecret.grantRead(taskRole);
 
   const username = databaseCredentialsSecret
     .secretValueFromJson("username")
@@ -335,7 +346,7 @@ export function WedNodeHapiPg({ stack }) {
   });
 
   new CfnOutput(stack, "executionRole", {
-    value: taskDefinition.executionRole.roleArn,
+    value: executionRole.roleArn,
   });
 
   new CfnOutput(stack, "family", {
@@ -372,9 +383,5 @@ export function WedNodeHapiPg({ stack }) {
 
   new CfnOutput(stack, "secretArn", {
     value: databaseCredentialsSecret.secretArn,
-  });
-
-  new CfnOutput(stack, "secretFullArn", {
-    value: databaseCredentialsSecret.secretFullArn,
   });
 }

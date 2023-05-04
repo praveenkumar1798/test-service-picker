@@ -6,7 +6,7 @@ on:
       - develop
       - qa
       - master
-#     paths: "wed-node-hapi-pg/**"
+    paths: "wed-node-hapi-pg/**"
 
   workflow_dispatch:
 

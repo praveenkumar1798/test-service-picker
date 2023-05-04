@@ -1,20 +1,11 @@
 {
-<<<<<<< Updated upstream
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:14",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:15",
   "containerDefinitions": [
     {
       "name": "wed-container-develop",
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:c02bb322461283dc6c9f2422deb34f40302b896f05ef0ce447f3e283dba187ad",
-=======
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:9",
-  "containerDefinitions": [
-    {
-      "name": "wed-container-develop",
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:617ffd4578da490bc2e9e8a7b7a26446a6e5322af49f8824463b86ed67db1126",
->>>>>>> Stashed changes
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:37747e7121d828039935042f4f50a710528c7567",
       "cpu": 0,
       "memory": 512,
-      "links": [],
       "portMappings": [
         {
           "containerPort": 9000,
@@ -23,20 +14,16 @@
         }
       ],
       "essential": true,
-      "entryPoint": [],
-      "command": [],
       "environment": [
         {
           "name": "ENVIRONMENT_NAME",
           "value": "development"
         },
-<<<<<<< Updated upstream
         {
           "name": "BUILD_NAME",
           "value": "develop"
         }
       ],
-      "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
       "secrets": [
@@ -45,63 +32,21 @@
           "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-GQbV2T:password::"
         }
       ],
-=======
-        {
-          "name": "REDIS_HOST",
-          "value": "wed-redis-cluster.9txi6w.0001.aps1.cache.amazonaws.com"
-        },
-        {
-          "name": "DB_URI",
-          "value": "postgres://username:[#cgi6Ip5k6ey1k&|AJ5yGfYQ84QRa@dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com/test_database_develop"
-        },
-        {
-          "name": "BUILD_NAME",
-          "value": "develop"
-        },
-        {
-          "name": "DB_HOST",
-          "value": "dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com"
-        }
-      ],
-      "environmentFiles": [],
-      "mountPoints": [],
-      "volumesFrom": [],
-      "secrets": [],
->>>>>>> Stashed changes
-      "dnsServers": [],
-      "dnsSearchDomains": [],
-      "extraHosts": [],
-      "dockerSecurityOptions": [],
-      "dockerLabels": {},
-      "ulimits": [],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-<<<<<<< Updated upstream
           "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerdevelopLogGroupD017D5DD-qgkZqZcxUdGi",
-=======
-          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerdevelopLogGroupD017D5DD-ab6oLXwUOq4O",
->>>>>>> Stashed changes
           "awslogs-region": "ap-south-1",
           "awslogs-stream-prefix": "wed-log-group-develop"
-        },
-        "secretOptions": []
-      },
-      "systemControls": []
+        }
+      }
     }
   ],
   "family": "wed-task-definition-develop",
-<<<<<<< Updated upstream
   "taskRoleArn": "arn:aws:iam::511522223657:role/wed-ecs-task-role-develop",
   "executionRoleArn": "arn:aws:iam::511522223657:role/wed-ecs-execution-role-develop",
   "networkMode": "awsvpc",
-  "revision": 14,
-=======
-  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-task-role-develop",
-  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-WedNodeHapiPg-wedtaskdevelopExecutionR-X4QBZTTC3TTY",
-  "networkMode": "awsvpc",
-  "revision": 9,
->>>>>>> Stashed changes
+  "revision": 15,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -118,7 +63,7 @@
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+      "name": "ecs.capability.secrets.asm.environment-variables"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -138,12 +83,8 @@
   "requiresCompatibilities": ["EC2", "FARGATE"],
   "cpu": "256",
   "memory": "512",
-<<<<<<< Updated upstream
-  "registeredAt": "2023-05-04T04:46:52.763Z",
-=======
-  "registeredAt": "2023-05-04T02:46:03.171Z",
->>>>>>> Stashed changes
-  "registeredBy": "arn:aws:sts::511522223657:assumed-role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1/AWSCloudFormation",
+  "registeredAt": "2023-05-04T04:58:37.304Z",
+  "registeredBy": "arn:aws:iam::511522223657:user/praveen",
   "tags": [
     {
       "key": "sst:app",

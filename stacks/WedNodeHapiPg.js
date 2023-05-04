@@ -240,12 +240,9 @@ export function WedNodeHapiPg({ stack }) {
     }
   );
 
-<<<<<<< Updated upstream
   databaseCredentialsSecret.grantRead(taskRole);
   databaseCredentialsSecret.grantRead(executionRole);
 
-=======
->>>>>>> Stashed changes
   const taskDefinition = new ecs.TaskDefinition(
     stack,
     `${clientPrefix}-task-${environment}`,

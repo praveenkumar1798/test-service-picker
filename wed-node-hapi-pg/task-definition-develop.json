@@ -5,7 +5,7 @@
       "name": "wed-container-develop",
       "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:fa269b4c7ae7af75e2a0160dd729bad295150f520047c42f912c1ebb29e8def3",
       "cpu": 0,
-      "memory": 512,
+      "memory": 1024,
       "links": [],
       "portMappings": [
         {
@@ -93,8 +93,8 @@
   "placementConstraints": [],
   "compatibilities": ["EC2", "FARGATE"],
   "requiresCompatibilities": ["EC2", "FARGATE"],
-  "cpu": "256",
-  "memory": "512",
+  "cpu": "512",
+  "memory": "1024",
   "registeredAt": "2023-05-04T07:57:52.771Z",
   "registeredBy": "arn:aws:sts::511522223657:assumed-role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1/AWSCloudFormation",
   "tags": [

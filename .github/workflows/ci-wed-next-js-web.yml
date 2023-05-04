@@ -38,7 +38,7 @@ jobs:
         run: yarn lint
 
       - name: Build
-        run: yarn build:development
+        run: yarn build:dev
 
       - name: Test
         run: yarn test

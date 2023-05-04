@@ -9,7 +9,7 @@ export default [
       const message = 'Health check up and running!';
       logger().info(message);
       return h.response({
-        data: 'The wed-node-hapi-pg template is at your service',
+        data: 'The wed-node-hapi-pg by service picker is at your service',
       });
     },
     options: {

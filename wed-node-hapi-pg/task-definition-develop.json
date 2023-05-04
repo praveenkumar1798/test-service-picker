@@ -1,125 +1,117 @@
 {
-  "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-WedNodeHapiPg-wedtaskdevelopExecutionR-1BHWZS5WZL4D9",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:9",
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerLogGroupFDE056C3-2Q52e4G1l4Om",
-          "awslogs-stream-prefix": "wed-log-group-develop",
-          "awslogs-region": "ap-south-1"
-        }
-      },
-      "entryPoint": null,
+      "name": "wed-container-develop",
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:617ffd4578da490bc2e9e8a7b7a26446a6e5322af49f8824463b86ed67db1126",
+      "cpu": 0,
+      "memory": 512,
+      "links": [],
       "portMappings": [
         {
-          "hostPort": "9000",
-          "protocol": "tcp",
-          "containerPort": "9000"
+          "containerPort": 9000,
+          "hostPort": 9000,
+          "protocol": "tcp"
         }
       ],
-      "command": null,
-      "linuxParameters": null,
-      "cpu": 0,
+      "essential": true,
+      "entryPoint": [],
+      "command": [],
       "environment": [
         {
           "name": "ENVIRONMENT_NAME",
-          "value": ".development"
-        }
-      ],
-      "secrets": [
+          "value": "development"
+        },
         {
-          "name": "DB_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-ZAML6B:password::"
+          "name": "REDIS_HOST",
+          "value": "wed-redis-cluster.9txi6w.0001.aps1.cache.amazonaws.com"
+        },
+        {
+          "name": "DB_URI",
+          "value": "postgres://username:[#cgi6Ip5k6ey1k&|AJ5yGfYQ84QRa@dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com/test_database_develop"
+        },
+        {
+          "name": "BUILD_NAME",
+          "value": "develop"
+        },
+        {
+          "name": "DB_HOST",
+          "value": "dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com"
         }
       ],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
+      "environmentFiles": [],
       "mountPoints": [],
-      "workingDirectory": null,
-      "dockerSecurityOptions": null,
-      "memory": null,
-      "memoryReservation": null,
       "volumesFrom": [],
-      "stopTimeout": null,
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
-      "essential": true,
-      "links": null,
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:latest",
-      "name": "wed-container"
+      "secrets": [],
+      "dnsServers": [],
+      "dnsSearchDomains": [],
+      "extraHosts": [],
+      "dockerSecurityOptions": [],
+      "dockerLabels": {},
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerdevelopLogGroupD017D5DD-ab6oLXwUOq4O",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "wed-log-group-develop"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
     }
   ],
-  "placementConstraints": [],
-  "memory": "2048",
-  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-task-role-develop",
-  "compatibilities": ["EC2", "FARGATE"],
   "family": "wed-task-definition-develop",
+  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-task-role-develop",
+  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-WedNodeHapiPg-wedtaskdevelopExecutionR-X4QBZTTC3TTY",
+  "networkMode": "awsvpc",
+  "revision": 9,
+  "volumes": [],
+  "status": "ACTIVE",
   "requiresAttributes": [
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.execution-role-awslogs"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.ecr-auth"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.task-eni"
     }
   ],
-  "pidMode": null,
-  "requiresCompatibilities": ["FARGATE"],
-  "networkMode": "awsvpc",
-  "cpu": "1024",
-  "inferenceAccelerators": null,
-  "proxyConfiguration": null,
-  "volumes": []
+  "placementConstraints": [],
+  "compatibilities": ["EC2", "FARGATE"],
+  "requiresCompatibilities": ["EC2", "FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "registeredAt": "2023-05-04T02:46:03.171Z",
+  "registeredBy": "arn:aws:sts::511522223657:assumed-role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1/AWSCloudFormation",
+  "tags": [
+    {
+      "key": "sst:app",
+      "value": "web-app"
+    },
+    {
+      "key": "sst:stage",
+      "value": "dev"
+    }
+  ]
 }

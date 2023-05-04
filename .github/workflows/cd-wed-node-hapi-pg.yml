@@ -54,14 +54,10 @@ jobs:
       # Build, tag, and push image to Amazon ECR
       - name: Build, tag, and push image to ECR
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          IMAGE_TAG: ${{ github.sha }}
           DOCKER_BUILDKIT: 1
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ENVIRONMENT_NAME=${{ steps.environment.outputs.environment_name }}
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }} . --build-arg ENVIRONMENT_NAME=${{ steps.environment.outputs.environment_name }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
 
       # Create and configure Amazon ECS task definition
       - name: Render Amazon ECS task definition
@@ -69,8 +65,8 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: wed-node-hapi-pg/task-definition-${{ steps.vars.outputs.short_ref }}.json
-          container-name: wed-container
-          image: 511522223657.dkr.ecr.ap-south-1.amazonaws.com/$ECR_REPOSITORY:123
+          container-name: wed-container-${{ steps.vars.outputs.short_ref }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
 
       # Deploy to Amazon ECS
       - name: Deploy to Amazon ECS

@@ -231,8 +231,6 @@ export function WedNodeHapiPg({ stack }) {
     }
   );
 
-  databaseCredentialsSecret.grantRead(taskRole);
-
   const taskDefinition = new ecs.TaskDefinition(
     stack,
     `${clientPrefix}-task-${environment}`,
@@ -245,6 +243,8 @@ export function WedNodeHapiPg({ stack }) {
       taskRole: taskRole,
     }
   );
+
+  databaseCredentialsSecret.grantRead(taskRole);
 
   const username = databaseCredentialsSecret
     .secretValueFromJson("username")

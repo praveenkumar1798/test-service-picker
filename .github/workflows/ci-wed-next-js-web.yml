@@ -1,21 +1,21 @@
 name: CI wed-next-js-web
 on:
-    push:
-      branches:
-        - develop
-        - qa
-        - master
-      paths: "wed-next-js-web/**"
-    pull_request:
-      paths: "wed-next-js-web/**"
+  push:
+    branches:
+      - develop
+      - qa
+      - master
+    paths: "wed-next-js-web/**"
+  pull_request:
+    paths: "wed-next-js-web/**"
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-    defaults: 
+    defaults:
       run:
         working-directory: ./wed-next-js-web
     strategy:

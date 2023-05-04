@@ -23,26 +23,19 @@
           "value": "development"
         },
         {
-          "name": "REDIS_HOST",
-          "value": "wed-redis-cluster.9txi6w.0001.aps1.cache.amazonaws.com"
-        },
-        {
-          "name": "DB_URI",
-          "value": "postgres://username:[#cgi6Ip5k6ey1k&|AJ5yGfYQ84QRa@dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com/test_database_develop"
-        },
-        {
           "name": "BUILD_NAME",
           "value": "develop"
-        },
-        {
-          "name": "DB_HOST",
-          "value": "dev-web-app-wednodehapipg-weddatabaseinstancedevel-ftmq3zh8zf6p.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com"
         }
       ],
       "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
-      "secrets": [],
+      "secrets": [
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-deRhpk:password::"
+        }
+      ],
       "dnsServers": [],
       "dnsSearchDomains": [],
       "extraHosts": [],

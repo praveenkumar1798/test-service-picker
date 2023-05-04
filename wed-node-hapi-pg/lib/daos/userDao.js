@@ -1,5 +1,7 @@
 import { models } from '@models';
 
+// test
+
 const attributes = [
   'id',
   'first_name',
@@ -8,13 +10,14 @@ const attributes = [
   'oauth_client_id',
 ];
 
-export const findOneUser = async (userId) => models.users.findOne({
-  attributes,
-  where: {
-    id: userId,
-  },
-  underscoredAll: false,
-});
+export const findOneUser = async (userId) =>
+  models.users.findOne({
+    attributes,
+    where: {
+      id: userId,
+    },
+    underscoredAll: false,
+  });
 
 export const findAllUser = async (page, limit) => {
   const where = {};

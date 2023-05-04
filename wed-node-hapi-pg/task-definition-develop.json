@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:9",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/wed-task-definition-develop:14",
   "containerDefinitions": [
     {
       "name": "wed-container-develop",
-      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:617ffd4578da490bc2e9e8a7b7a26446a6e5322af49f8824463b86ed67db1126",
+      "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:c02bb322461283dc6c9f2422deb34f40302b896f05ef0ce447f3e283dba187ad",
       "cpu": 0,
       "memory": 512,
       "links": [],
@@ -33,7 +33,7 @@
       "secrets": [
         {
           "name": "DB_PASSWORD",
-          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-deRhpk:password::"
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:wed-database-credentials-develop-GQbV2T:password::"
         }
       ],
       "dnsServers": [],
@@ -45,7 +45,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerdevelopLogGroupD017D5DD-ab6oLXwUOq4O",
+          "awslogs-group": "dev-web-app-WedNodeHapiPg-wedtaskdevelopwedcontainerdevelopLogGroupD017D5DD-qgkZqZcxUdGi",
           "awslogs-region": "ap-south-1",
           "awslogs-stream-prefix": "wed-log-group-develop"
         },
@@ -55,10 +55,10 @@
     }
   ],
   "family": "wed-task-definition-develop",
-  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-task-role-develop",
-  "executionRoleArn": "arn:aws:iam::511522223657:role/dev-web-app-WedNodeHapiPg-wedtaskdevelopExecutionR-X4QBZTTC3TTY",
+  "taskRoleArn": "arn:aws:iam::511522223657:role/wed-ecs-task-role-develop",
+  "executionRoleArn": "arn:aws:iam::511522223657:role/wed-ecs-execution-role-develop",
   "networkMode": "awsvpc",
-  "revision": 9,
+  "revision": 14,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -95,7 +95,7 @@
   "requiresCompatibilities": ["EC2", "FARGATE"],
   "cpu": "256",
   "memory": "512",
-  "registeredAt": "2023-05-04T02:46:03.171Z",
+  "registeredAt": "2023-05-04T04:46:52.763Z",
   "registeredBy": "arn:aws:sts::511522223657:assumed-role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1/AWSCloudFormation",
   "tags": [
     {

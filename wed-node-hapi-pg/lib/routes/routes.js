@@ -8,7 +8,7 @@ export default [
     handler: (request, h) => {
       const message = 'Health check up and running!';
       logger().info(message);
-      return h.response({ data: 'The wed-node-hapi-pg is at your service' });
+      return h.response({ data: 'The wed-node-hapi-pg template is at your service' });
     },
     options: {
       description: 'this is the health check api',
